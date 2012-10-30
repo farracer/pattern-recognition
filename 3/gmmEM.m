@@ -26,21 +26,21 @@ for i=1:iter
     %% calculate probabilities
     p_x=zeros(1,samples);
     %probability of  p(x | theta)
-    for i=1:K
-        p_x = p_x+comp_lik(i,:)*gmm(i).p;
+    for j=1:K
+        p_x = p_x+comp_lik(j,:)*gmm(j).p;
     end
 
     %responsibility of mixture component p_j for each sample p(j|x_k,theta)
     p_j = zeros(K,samples);
-    for i=1:K
+    for j=1:K
 
-        p_j(i,:)=comp_lik(i,:)*gmm(i).p./p_x;
+        p_j(j,:)=comp_lik(j,:)*gmm(j).p./p_x;
     end
 
 
     %% update parameters
-    for i = 1:K
-        [gmm(i).mean,gmm(i).covm,gmm(i).p] = updateParametersGMM(data,p_j(i,:));
+    for j = 1:K
+        [gmm(j).mean,gmm(j).covm,gmm(j).p] = updateParametersGMM(data,p_j(j,:));
 
     end
     
