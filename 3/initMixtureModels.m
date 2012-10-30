@@ -12,7 +12,10 @@ if r>c
 end
 
     
-[idx,c] = kmeans(data',K);
+[idx,c] = kmeans(data',K,'Start','cluster', ...
+            'Maxiter',100, ...
+            'EmptyAction','drop', ...
+            'Display','off');
 
 gmm = struct([]);
 n_samples = numel(data)/3;

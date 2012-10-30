@@ -15,5 +15,6 @@ p=zeros(ncomps,nsamples);
 
 for i = 1:ncomps
     p(i,:)=mvnpdf(data',gmm(i).mean',gmm(i).covm);
+    p(i,p(i,:)==0)=realmin;
 end
     
