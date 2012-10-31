@@ -16,13 +16,13 @@ sum_mu = sum(repmat(p_j,covm_size,1).*data,2);
 mu_new = sum_mu/norm_factor;
  % to make it fit, should be 
 
-% covm_new = zeros(covm_size);
-% for i=1:n_samples
-%     covm_new = covm_new + p_j(i)*(data(:,i)-mu_new)*(data(:,i)-mu_new)';
-% end
-% 
-% covm_new = covm_new/norm_factor;
-covm_new = updateV(data',p_j',mu_new',norm_factor,[]);
+covm_new = zeros(covm_size);
+for i=1:n_samples
+    covm_new = covm_new + p_j(i)*(data(:,i)-mu_new)*(data(:,i)-mu_new)';
+end
+
+covm_new = covm_new/norm_factor;
+covm_new = updateV(data',p_j',mu_new,norm_factor);
 
 function V = updateV( X, E, M, W, b0 )
 

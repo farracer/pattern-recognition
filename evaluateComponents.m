@@ -14,7 +14,7 @@ function p=evaluateComponents(data,gmm)
 p=zeros(ncomps,nsamples);
 
 for i = 1:ncomps
-    p(i,:)=mvnpdf(data',gmm(i).mean',gmm(i).covm);
+    p(i,:)=mvnpdf(data',gmm(i).mean',gmm(i).covm)*gmm(i).p;
     p(i,p(i,:)==0)=realmin;
 end
     
