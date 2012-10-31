@@ -1,4 +1,4 @@
-function gmm = gmmEM(data, K, iter)
+function gmm = gmmEM(data, K, iter,showbool)
 %GMMEM - EM-algorithm for Gaussian Mixture Models
 %  Usage: gmm = gmmEM(data, K, iter)
 %
@@ -18,8 +18,9 @@ gmm = initMixtureModels(data,K);
 
 %% calculate probabilities of components
 for i=1:iter
-    
-    %gmmDraw(gmm,data);
+    if showbool
+        gmmDraw(gmm,data);
+    end
     %p(x_k|j,theta)
     comp_lik = evaluateComponents(data,gmm);
 
@@ -41,6 +42,7 @@ for i=1:iter
         [gmm(j).mean,gmm(j).covm,gmm(j).p] = updateParametersGMM(data,p_j(j,:));
 
     end
-    
-    %pause(.5);
+    if showbool
+        pause(.5);
+    end
 end
